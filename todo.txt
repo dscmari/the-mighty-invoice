@@ -1,0 +1,5 @@
+probieren customer über frontend hinzuzufügen 
+-> erstellen form input in react
+-> daten an express server übergeben
+-> daten von dort an postgresql server, mightyinvoivedb weitergeben
+-> daten von react aus über express auslesen und im frontend displayen

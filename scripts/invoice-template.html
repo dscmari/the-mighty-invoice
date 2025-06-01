@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rechnung - {{Rechnungsnummer}}</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', 'Helvetica', Arial, sans-serif;
+            margin: 0;
+            padding: 2cm;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+            font-size: 10pt;
+        }
+
+        .container {
+            max-width: 21cm; /* A4 width */
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 2cm;
+            border: 1px solid #eee;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            color: #333;
+            font-size: 24pt;
+            margin: 0;
+            line-height: 1;
+        }
+
+        .company-info {
+            text-align: right;
+            font-size: 9pt;
+        }
+
+        .company-info p {
+            margin: 0;
+        }
+
+        .address-block {
+            margin-bottom: 30px;
+            padding: 15px;
+            border: 1px solid #eee;
+            background-color: #fcfcfc;
+            border-radius: 4px;
+        }
+
+        .address-block p {
+            margin: 0;
+        }
+
+        .invoice-details {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            font-size: 10pt;
+        }
+
+        .invoice-details div p {
+            margin: 0;
+        }
+
+        .invoice-details .left-details {
+            flex-grow: 1;
+        }
+
+        .invoice-details .right-details {
+            text-align: right;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+            font-size: 9pt;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .totals-table {
+            width: 40%; /* Adjust as needed */
+            margin-left: auto; /* Aligns to the right */
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .totals-table th, .totals-table td {
+            border: none;
+            padding: 5px 10px;
+            text-align: right;
+        }
+
+        .totals-table tr.subtotal td,
+        .totals-table tr.vat td {
+            border-bottom: 1px solid #eee;
+        }
+
+        .totals-table tr.total th,
+        .totals-table tr.total td {
+            font-size: 11pt;
+            font-weight: bold;
+            border-top: 2px solid #333;
+            padding-top: 10px;
+        }
+
+        .footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 8pt;
+            color: #777;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+
+        .bank-details p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div>
+                <h1>Rechnung</h1>
+            </div>
+            <div class="company-info">
+                <p><strong>Marian Nökel</strong></p>
+                <p>Schlierseestraße 10</p>
+                <p>81541 München</p>
+                <p>Deutschland</p>
+                <p>Telefon: 01523 1432433</p>
+                <p>E-Mail: noekel@namaste-websites.de</p>
+            </div>
+        </div>
+
+        <div class="address-block">
+            <p><strong>Rechnung an:</strong></p>
+            <p>{{Kundenname}}</p>
+            <p>{{Kundenstraße}}</p>
+            <p>{{Kunden_PLZ}} {{Kunden_Ort}}</p>
+            <p>{{Kundenland}}</p>
+        </div>
+
+        <div class="invoice-details">
+            <div class="left-details">
+                <p><strong>Rechnungsnummer:</strong> {{Rechnungsnummer}}</p>
+                <!-- <p><strong>Kunden-Nr.:</strong> {{Kunden_ID}}</p> -->
+            </div>
+            <div class="right-details">
+                <p><strong>Rechnungsdatum:</strong> {{Rechnungsdatum}}</p>
+                <p><strong>Fälligkeitsdatum:</strong> {{Fälligkeitsdatum}}</p>
+            </div>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Position</th>
+                    <th>Beschreibung</th>
+                    <th class="text-right">Menge</th>
+                    <th class="text-right">Einzelpreis</th>
+                    <th class="text-right">Gesamt</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Webseiten-Entwicklung (Projekt A)</td>
+                    <td class="text-right">1</td>
+                    <td class="text-right">1.500,00 €</td>
+                    <td class="text-right">1.500,00 €</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Monatliches Hosting (Januar - März)</td>
+                    <td class="text-right">3</td>
+                    <td class="text-right">50,00 €</td>
+                    <td class="text-right">150,00 €</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="totals-table">
+            <tr class="subtotal">
+                <th>Netto Gesamt:</th>
+                <td>{{Netto_Gesamt}} €</td>
+            </tr>
+            <tr class="vat">
+                <th>{{MwSt_Satz}}% Mehrwertsteuer:</th>
+                <td>{{MwSt_Betrag}} €</td>
+            </tr>
+            <tr class="total">
+                <th>Gesamtbetrag:</th>
+                <td>{{Gesamtbetrag}} €</td>
+            </tr>
+        </table>
+
+        <div class="footer">
+            <p>Vielen Dank für Ihren Auftrag! Wir freuen uns auf die weitere Zusammenarbeit.</p>
+            <p>Bitte überweisen Sie den Betrag bis zum {{Fälligkeitsdatum}} auf folgendes Konto:</p>
+            <div class="bank-details">
+                <p><strong>Bank:</strong> {{Deine_Bankname}}</p>
+                <p><strong>IBAN:</strong> {{Deine_IBAN}}</p>
+                <p><strong>BIC:</strong> {{Deine_BIC}}</p>
+            </div>
+            <p>Steuernummer: {{Deine_Steuernummer}} | USt-IdNr.: {{Deine_USt_ID}}</p>
+            <p>{{Webseite}}</p>
+        </div>
+    </div>
+</body>
+</html>
