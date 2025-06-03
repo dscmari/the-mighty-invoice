@@ -1,11 +1,25 @@
 import express from 'express';
 import pg from 'pg';
+import cors from 'cors'
 
 const app = express();
 
 const port = process.env.PORT || 3000;
 
+// Use CORS middleware BEFORE your routes
+// This allows requests from ALL origins during development.
+// In production, you'd configure it to allow only your frontend's domain.
+app.use(cors());
+
 app.use(express.json());
+
+app.post('/api/customers', (req, res) => {
+    // This function runs when a POST request hits http://localhost:3001/api/customers
+    const customerData = req.body;
+    console.log('Received customer:', customerData);
+    // ... save to database ...
+    res.status(201).json({ message: 'Customer added!' });
+});
 
 const pool = new pg.Pool({
   user: 'marian',         // Dein PostgreSQL-Benutzername
